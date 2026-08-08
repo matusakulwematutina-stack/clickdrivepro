@@ -1,0 +1,11 @@
+# ClickPro Drive — Supabase local/project config
+
+[functions.pawapay-deposit]
+verify_jwt = true
+
+[functions.pawapay-status]
+verify_jwt = true
+
+[functions.pawapay-callback]
+# Callback PawaPay (pas de JWT utilisateur)
+verify_jwt = false

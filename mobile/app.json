@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "ClickPro Drive",
+    "slug": "clickpro-drive",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "clickprodrive",
+    "newArchEnabled": false,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0B0B0B"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.clickpro.drive",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "ClickPro Drive utilise votre position pour commander et suivre les courses.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "ClickPro Drive utilise votre position pour le suivi des courses en temps réel."
+      }
+    },
+    "android": {
+      "package": "com.clickpro.drive",
+      "adaptiveIcon": {
+        "backgroundColor": "#0B0B0B",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ],
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Autoriser ClickPro Drive à utiliser votre position."
+        }
+      ]
+    ]
+  }
+}

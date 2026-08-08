@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClickPro Drive — VTC Lubumbashi</title>
+    <meta
+      name="description"
+      content="ClickPro Drive — application VTC noir & jaune pour Lubumbashi. Client, chauffeur, admin."
+    />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230B0B0B' width='100' height='100'/><text y='.9em' x='50%' text-anchor='middle' font-size='72' fill='%23FFCC00'>C</text></svg>" />
+    <style>
+      :root {
+        --bg: #0b0b0b;
+        --panel: #141414;
+        --yellow: #ffcc00;
+        --muted: #9a9a9a;
+        --border: #2a2a2a;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: var(--bg);
+        color: #fff;
+        min-height: 100vh;
+        line-height: 1.5;
+      }
+      .wrap { max-width: 920px; margin: 0 auto; padding: 48px 20px 64px; }
+      .badge {
+        display: inline-block;
+        background: rgba(255, 204, 0, 0.12);
+        color: var(--yellow);
+        border: 1px solid rgba(255, 204, 0, 0.35);
+        border-radius: 999px;
+        padding: 6px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+      h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.1;
+        margin-bottom: 12px;
+      }
+      h1 span { color: var(--yellow); }
+      .lead { color: var(--muted); font-size: 1.05rem; max-width: 620px; margin-bottom: 32px; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 14px;
+        margin-bottom: 36px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px;
+      }
+      .card h2 { font-size: 15px; margin-bottom: 8px; color: var(--yellow); }
+      .card p { color: var(--muted); font-size: 14px; }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--yellow);
+        color: #111;
+        text-decoration: none;
+        font-weight: 800;
+        padding: 12px 20px;
+        border-radius: 12px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+      .cta.secondary {
+        background: transparent;
+        color: var(--yellow);
+        border: 1px solid var(--border);
+      }
+      footer { margin-top: 48px; color: var(--muted); font-size: 12px; }
+      code {
+        background: #1a1a1a;
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="badge">ClickPro Drive · RDC</div>
+      <h1>Mobilité <span>noir & jaune</span> à Lubumbashi</h1>
+      <p class="lead">
+        Application VTC (Expo + Supabase) : commande client, dispatch chauffeur,
+        portefeuille PawaPay, admin et suivi en temps réel.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h2>Client</h2>
+          <p>Commande, suivi GPS, ETA, négociation de prix, SOS et historique.</p>
+        </div>
+        <div class="card">
+          <h2>Chauffeur</h2>
+          <p>Dispatch séquentiel, guidage vocal, arrêts multiples, portefeuille.</p>
+        </div>
+        <div class="card">
+          <h2>Admin</h2>
+          <p>Tarifs, commission, zone, carte des chauffeurs, recharges et SOS.</p>
+        </div>
+      </div>
+
+      <a class="cta" href="https://github.com/matusakulwematutina-stack/clickdrivepro" target="_blank" rel="noopener">
+        Code source GitHub
+      </a>
+      <a class="cta secondary" href="https://expo.dev" target="_blank" rel="noopener">
+        App mobile (Expo / APK)
+      </a>
+
+      <footer>
+        <p>Dépôt : <code>matusakulwematutina-stack/clickdrivepro</code></p>
+        <p style="margin-top: 8px">
+          Build mobile : <code>cd mobile && npm install && npx expo start</code>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

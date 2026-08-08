@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "name": "clickdrivepro",
+  "buildCommand": null,
+  "outputDirectory": "web",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}

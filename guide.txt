@@ -1,0 +1,1133 @@
+tu sais comment fonctionne yango pour que je puisse le reproduire ?
+
+Oui. Si ton objectif est de reproduire le fonctionnement de Yango (sans copier leur marque, leur code ou leurs éléments protégés), c'est tout à fait réalisable. Les principes techniques sont connus et peuvent être reconstruits.
+
+Comment fonctionne Yango
+
+Yango repose sur une plateforme composée de plusieurs applications qui communiquent avec un serveur central.
+
+               ┌─────────────────────┐
+               │  Serveur central    │
+               │ API + Base de données │
+               └─────────┬───────────┘
+                         │
+      ┌──────────────────┼──────────────────┐
+      │                  │                  │
+      ▼                  ▼                  ▼
+ Client (Android)   Chauffeur        Admin Web
+                     (Android)       (Gestion)
+1. Application Client
+
+Le client peut :
+
+Créer un compte.
+Autoriser la géolocalisation.
+Choisir son point de départ.
+Choisir sa destination.
+Voir le prix estimé.
+Commander un véhicule.
+Voir le chauffeur arriver en temps réel.
+Discuter ou appeler le chauffeur.
+Payer (espèces, carte ou mobile money).
+Donner une note.
+2. Application Chauffeur
+
+Le chauffeur :
+
+Se connecte.
+Passe en mode "Disponible".
+Reçoit les demandes proches.
+Accepte ou refuse.
+Suit l'itinéraire GPS.
+Démarre la course.
+Termine la course.
+Reçoit son paiement.
+Consulte son historique.
+3. Le serveur
+
+Le serveur fait tout le travail :
+
+enregistre les utilisateurs ;
+calcule les distances ;
+trouve le chauffeur le plus proche ;
+envoie les notifications ;
+calcule le tarif ;
+stocke les trajets ;
+gère les commissions.
+Déroulement d'une course
+Étape 1
+
+Le client ouvre l'application.
+
+GPS :
+
+-11.6700
+27.4800
+Étape 2
+
+Il choisit :
+
+Départ
+
+↓
+
+Destination
+
+Étape 3
+
+Le serveur calcule :
+
+distance ;
+durée ;
+prix estimé.
+
+Exemple :
+
+Distance : 8,4 km
+
+Temps : 18 minutes
+
+Prix : 17 000 FC
+Étape 4
+
+Le serveur cherche les chauffeurs disponibles.
+
+Exemple :
+
+Chauffeur A
+800 m
+
+Chauffeur B
+2 km
+
+Chauffeur C
+600 m
+
+Le plus proche reçoit la demande.
+
+Étape 5
+
+Le chauffeur accepte.
+
+Le client voit :
+
+Nom
+
+Photo
+
+Voiture
+
+Plaque
+
+Distance
+
+Temps d'arrivée
+Étape 6
+
+Les deux téléphones envoient leur position toutes les quelques secondes.
+
+Exemple :
+
+Client :
+
+-11.6702
+27.4811
+
+↓
+
+Serveur
+
+↓
+
+Chauffeur
+
+Le déplacement est affiché sur la carte en temps réel.
+
+Étape 7
+
+Le chauffeur arrive.
+
+Le client reçoit :
+
+Votre chauffeur est arrivé.
+Étape 8
+
+La course commence.
+
+Le GPS continue d'envoyer la position.
+
+Le prix peut évoluer selon :
+
+le temps ;
+la distance ;
+les arrêts ;
+les embouteillages (selon les règles choisies).
+Étape 9
+
+Arrivée.
+
+Le serveur calcule :
+
+Distance réelle
+
+Temps réel
+
+Prix final
+Étape 10
+
+Paiement.
+
+Puis :
+
+★★★★★
+
+Le client note le chauffeur.
+
+Le chauffeur note le client.
+
+Les cartes
+
+Yango n'utilise pas ses propres cartes. Il s'appuie généralement sur des fournisseurs de cartographie comme :
+
+Google Maps
+OpenStreetMap (avec des moteurs de calcul d'itinéraire)
+d'autres fournisseurs selon les pays.
+Géolocalisation
+
+Le téléphone envoie régulièrement :
+
+Latitude
+
+Longitude
+
+Vitesse
+
+Direction
+
+Par exemple :
+
+{
+lat : -11.6623
+
+lng : 27.4851
+
+speed : 42 km/h
+
+heading : 180°
+}
+Calcul du prix
+
+Une formule simple peut être :
+
+Prix =
+prise en charge
++ (distance × prix/km)
++ (temps × prix/minute)
+
+Exemple :
+
+5 000 FC
+
++
+
+8 km × 1 200 FC
+
++
+
+15 min × 150 FC
+
+=
+
+16 850 FC
+
+Tu peux aussi ajouter :
+
+tarif de nuit ;
+heures de pointe ;
+frais d'attente ;
+commission de la plateforme.
+Technologies possibles
+
+Pour un projet moderne, tu pourrais utiliser :
+
+Application Client : Flutter
+Application Chauffeur : Flutter
+Backend : Supabase ou Firebase, ou un backend personnalisé (par exemple Node.js ou Django)
+Base de données : PostgreSQL
+Temps réel : WebSocket ou Supabase Realtime
+Notifications : Firebase Cloud Messaging
+Cartographie : Google Maps ou OpenStreetMap
+Paiement : Mobile Money (Orange Money, M-Pesa, Airtel Money), espèces, etc.
+
+Projet : TOTO RIDE
+Vision
+
+Une plateforme unique permettant de :
+
+🚖 Taxi (comme Yango)
+🛵 Moto-taxi
+🚚 Livraison de colis
+🍔 Livraison de repas
+🛒 Courses en magasin
+🚛 Camions de déménagement
+🚐 Location de véhicule avec chauffeur
+
+Le tout avec une seule application client.
+
+Les applications
+
+Il y aura 4 applications principales.
+
+1. Client
+
+Le client pourra :
+
+créer un compte
+connexion Google
+connexion téléphone
+connexion WhatsApp (si souhaité)
+géolocalisation automatique
+choisir la destination
+choisir le type de véhicule
+voir le prix estimé
+commander
+suivre le chauffeur
+appeler
+discuter
+partager le trajet
+programmer une course
+enregistrer ses adresses favorites
+consulter son historique
+payer
+noter
+2. Chauffeur
+
+Le chauffeur pourra :
+
+créer son compte
+envoyer ses documents
+envoyer les photos du véhicule
+validation par l'administrateur
+passer Disponible / Hors ligne
+recevoir les courses
+accepter
+refuser
+navigation GPS
+historique
+portefeuille
+demande de retrait
+statistiques
+revenus journaliers
+revenus mensuels
+3. Back Office Administrateur
+
+L'administrateur pourra :
+
+Tableau de bord
+courses aujourd'hui
+revenus
+chauffeurs connectés
+clients connectés
+carte en temps réel
+Gestion des chauffeurs
+validation
+suspension
+documents
+permis
+assurance
+véhicule
+Gestion des clients
+blocage
+historique
+portefeuille
+Gestion des véhicules
+Taxi
+Moto
+Pickup
+Minibus
+Camion
+Tarification
+
+Configurer :
+
+Prix au km
+
+Prix à la minute
+
+Prix minimum
+
+Supplément nuit
+
+Supplément pluie
+
+Supplément trafic
+
+Commission
+
+Promotions
+
+Coupons
+
+Réductions
+
+Bonus
+
+Parrainage
+
+Paiements
+
+Orange Money
+
+Airtel Money
+
+M-Pesa
+
+Espèces
+
+Carte bancaire
+
+Rapports
+
+Revenus
+
+Commissions
+
+Courses
+
+Chauffeurs
+
+Clients
+
+Taxes
+
+Export Excel
+
+Export PDF
+
+4. Super Admin
+
+Pour gérer plusieurs villes.
+
+Par exemple :
+
+Lubumbashi
+
+Kolwezi
+
+Likasi
+
+Kinshasa
+
+Kamina
+
+Chaque ville peut avoir :
+
+son tarif
+ses chauffeurs
+ses véhicules
+ses administrateurs
+Architecture
+Flutter Client
+
+↓
+
+API
+
+↓
+
+Serveur
+
+↓
+
+PostgreSQL
+
+↓
+
+Supabase Storage
+
+↓
+
+Firebase Notifications
+Base de données
+
+Je prévoirais environ 35 à 40 tables.
+
+Les principales :
+
+users
+
+roles
+
+clients
+
+drivers
+
+vehicles
+
+vehicle_types
+
+driver_documents
+
+cities
+
+zones
+
+rides
+
+ride_status
+
+payments
+
+payment_methods
+
+wallets
+
+withdrawals
+
+promotions
+
+coupons
+
+ratings
+
+messages
+
+notifications
+
+driver_locations
+
+trip_history
+
+settings
+
+currencies
+
+exchange_rates
+
+commissions
+
+surge_pricing
+
+audit_logs
+Flux d'une course
+Client
+
+↓
+
+Recherche
+
+↓
+
+Serveur
+
+↓
+
+Recherche du chauffeur
+
+↓
+
+Notification
+
+↓
+
+Acceptation
+
+↓
+
+Navigation
+
+↓
+
+Début
+
+↓
+
+Trajet
+
+↓
+
+Fin
+
+↓
+
+Paiement
+
+↓
+
+Évaluation
+Technologies
+Mobile
+
+Flutter
+
+Backend
+
+Je recommande Supabase :
+
+PostgreSQL
+Auth
+Realtime
+Storage
+Edge Functions
+Carte
+
+Google Maps ou OpenStreetMap selon le coût et les besoins.
+
+Notifications
+
+Firebase Cloud Messaging
+
+Paiements
+
+Orange Money
+
+Airtel Money
+
+M-Pesa
+
+Banques
+
+Fonctionnalités avancées
+Intelligence artificielle
+
+L'IA peut :
+
+prévoir les zones de forte demande ;
+suggérer le meilleur chauffeur ;
+détecter des comportements suspects ;
+optimiser les itinéraires.
+Sécurité
+code OTP avant le départ ;
+bouton SOS ;
+partage du trajet avec la famille ;
+enregistrement des incidents ;
+vérification des documents.
+Version entreprise
+
+Une société pourra créer un compte entreprise.
+
+Les employés commandent des courses.
+
+Le responsable reçoit :
+
+les factures ;
+les rapports ;
+le coût par département.
+Estimation du projet
+
+Un projet de ce niveau représente environ :
+
+4 applications Flutter (Client, Chauffeur, Admin mobile, Inspecteur si nécessaire) ;
+1 portail Web d'administration ;
+35 à 40 tables ;
+100 à 150 écrans ;
+250 à 350 API ou fonctions backend ;
+plus de 500 fonctionnalités si l'on vise une plateforme comparable aux grands acteurs du marché.
+
+
+Oui. Et vu tout ce que nous avons déjà conçu ensemble (TOTOMARKET, TOTO BUSINESS, etc.), je ne te conseille pas un simple cahier des charges. Je te conseille un dossier de conception complet (Software Requirements Specification - SRS), de niveau professionnel.
+
+Un document comme celui utilisé par les grandes entreprises avant de développer une plateforme comme Yango, Uber ou Bolt.
+
+Ce que je vais produire
+
+Ce ne sera pas un document de 20 ou 30 pages.
+
+Je prévois un document d'environ 300 à 500 pages, découpé en plusieurs volumes.
+
+Par exemple :
+
+Tome 1 : Vision du projet (20 à 30 pages)
+Présentation de TOTO RIDE
+Vision
+Objectifs
+Étude du marché congolais
+Analyse de la concurrence
+Business Model
+Sources de revenus
+Cas d'utilisation
+Contraintes
+Limites
+Tome 2 : Cahier des charges fonctionnel (100 à 150 pages)
+
+Pour chaque bouton, chaque écran, chaque action, il y aura :
+
+Objectif
+Description
+Acteurs concernés
+Préconditions
+Déroulement normal
+Cas alternatifs
+Cas d'erreur
+Validation
+Messages affichés
+Règles métier
+Permissions
+Journalisation
+
+Exemple :
+
+Écran de connexion
+
+Nous détaillerons notamment :
+
+connexion téléphone ;
+connexion e-mail ;
+connexion Google ;
+connexion Apple (si nécessaire) ;
+connexion par OTP ;
+récupération du mot de passe ;
+expiration de session ;
+appareil déjà connecté ;
+compte suspendu ;
+compte en attente de validation.
+Tome 3 : Base de données (80 à 120 pages)
+
+Pour chaque table :
+
+rôle ;
+description ;
+champs ;
+type de données ;
+index ;
+clés étrangères ;
+contraintes ;
+règles métier ;
+déclencheurs (triggers) ;
+politiques de sécurité (RLS si Supabase) ;
+exemples de données.
+
+Chaque relation sera expliquée.
+
+Tome 4 : API (100 pages)
+
+Pour chaque API :
+
+URL
+méthode
+paramètres
+authentification
+réponse
+erreurs
+exemples JSON
+sécurité
+performances
+limites
+Tome 5 : Applications Flutter
+
+Pour chaque écran :
+
+maquette ;
+composants ;
+états ;
+animations ;
+validations ;
+chargement ;
+erreurs réseau ;
+mode hors ligne ;
+reprise automatique.
+Tome 6 : Administration
+
+Le plus gros module.
+
+Il comprendra :
+
+tableau de bord ;
+gestion des chauffeurs ;
+gestion des clients ;
+gestion des villes ;
+gestion des pays ;
+gestion des tarifs ;
+gestion des coupons ;
+gestion des commissions ;
+gestion des tokens commerciaux ;
+gestion des abonnements ;
+portefeuille ;
+remboursements ;
+litiges ;
+support ;
+audit ;
+journaux d'activité.
+Tome 7 : Intelligence métier
+
+Il détaillera notamment :
+
+attribution des courses ;
+recherche du meilleur chauffeur ;
+calcul des tarifs ;
+calcul des bonus ;
+promotions ;
+parrainage ;
+classement des chauffeurs ;
+sanctions automatiques ;
+détection de fraude.
+Tome 8 : Sécurité
+authentification ;
+autorisation ;
+JWT ;
+OTP ;
+chiffrement ;
+protection contre les attaques ;
+limitation des requêtes ;
+sauvegardes ;
+restauration ;
+journalisation.
+Tome 9 : Déploiement
+Supabase
+PostgreSQL
+Flutter
+Android
+iOS
+Web
+Serveur
+Nom de domaine
+CDN
+Monitoring
+Sauvegardes
+Tome 10 : Maintenance
+mises à jour ;
+surveillance ;
+statistiques ;
+évolution ;
+assistance ;
+plan de reprise d'activité.
+Je veux aller encore plus loin
+
+Je te propose de concevoir TOTO RIDE comme une plateforme de mobilité, et non comme une simple application de taxi.
+
+Une seule plateforme permettra d'activer ou de désactiver des modules selon les besoins :
+
+🚖 Taxi
+🏍 Moto
+🚚 Livraison de colis
+🍽 Livraison de repas
+🛒 Courses en magasin
+🚛 Camions
+🚐 Location de véhicules
+🚍 Transport du personnel
+🚑 Ambulance (option)
+🚒 Assistance routière (option)
+
+Ainsi, un client pourra acheter seulement les modules dont il a besoin.
+
+Ce que je recommande avant d'écrire le document
+
+Je ne souhaite pas commencer directement la rédaction des 300 à 500 pages.
+
+Je préfère concevoir d'abord l'architecture complète, afin d'éviter les oublis et les incohérences.
+
+Je propose de travailler dans cet ordre :
+
+Architecture générale de la plateforme (tous les modules).
+Schéma complet de la base de données (environ 40 à 60 tables).
+Définition des rôles et permissions.
+Flux métier détaillés (plus de 100 scénarios).
+Arborescence de tous les écrans.
+Liste exhaustive des API.
+Rédaction du cahier des charges détaillé.
+
+
+PHASE 0 : CONCEPTION GÉNÉRALE (Architecture)
+
+Avant d'écrire une seule ligne de code, nous allons définir 100 % du fonctionnement.
+
+Cette phase est la plus importante.
+
+Livrables
+
+À la fin de cette phase, nous aurons :
+
+✅ Vision du produit
+✅ Architecture globale
+✅ Modules
+✅ Utilisateurs
+✅ Workflow
+✅ Base de données
+✅ API
+✅ Sécurité
+✅ Paiement
+✅ Notifications
+✅ Intelligence métier
+✅ Déploiement
+
+Seulement après cela, nous commencerons Flutter.
+
+PHASE 1 : IDENTITÉ DU PRODUIT
+Nom
+
+TOTO RIDE
+
+Slogan
+
+Déplacez-vous. Livrez. Gagnez.
+
+Mission
+
+Créer une plateforme africaine de mobilité permettant aux particuliers, entreprises et chauffeurs de se déplacer, transporter des colis et offrir leurs services avec une solution fiable, sécurisée et adaptée au contexte local.
+
+Vision
+
+Devenir la première plateforme de mobilité multi-services en Afrique centrale.
+
+Objectifs
+
+Le système doit permettre :
+
+✓ Commander un taxi
+
+✓ Commander une moto
+
+✓ Commander un camion
+
+✓ Livraison de repas
+
+✓ Livraison de colis
+
+✓ Livraison de courses
+
+✓ Location avec chauffeur
+
+✓ Transport d'entreprise
+
+✓ Ambulance (option)
+
+✓ Dépannage routier (option)
+
+Utilisateurs
+
+Nous ne devons pas avoir seulement deux types d'utilisateurs.
+
+Je propose 12 rôles.
+
+1. Client
+
+Commande un service.
+
+2. Chauffeur
+
+Accepte les courses.
+
+3. Livreur
+
+Effectue les livraisons.
+
+4. Commerçant
+
+Prépare une commande à livrer (intégration avec TotoMarket).
+
+5. Entreprise
+
+Commande des courses pour ses employés.
+
+6. Centre de support
+
+Répond aux clients et chauffeurs.
+
+7. Contrôleur
+
+Vérifie les documents des chauffeurs et véhicules.
+
+8. Gestionnaire de flotte
+
+Gère les véhicules appartenant à une société.
+
+9. Administrateur de ville
+
+Gère les opérations dans une ville donnée (Lubumbashi, Kolwezi, etc.).
+
+10. Administrateur national
+
+Supervise toutes les villes d'un pays.
+
+11. Super Administrateur
+
+Configure la plateforme complète.
+
+12. Auditeur
+
+Accès en lecture seule aux journaux et rapports.
+
+Les modules
+
+La plateforme sera découpée en modules activables.
+
+Module	Obligatoire	Activable
+Taxi	✅	Oui
+Moto	✅	Oui
+Livraison	✅	Oui
+Colis	✅	Oui
+Camion	✅	Oui
+Réservation	✅	Oui
+Entreprises	Oui	Oui
+Portefeuille	✅	Oui
+Coupons	Oui	Oui
+Parrainage	Oui	Oui
+Publicité	Oui	Oui
+SOS	✅	Oui
+Chat	✅	Oui
+Appel	✅	Oui
+Historique	✅	Oui
+
+Ainsi, un exploitant pourra choisir les modules qu'il souhaite utiliser.
+
+Les applications
+
+Il n'y aura pas seulement une application.
+
+Je recommande les suivantes :
+
+1. Client Flutter
+
+Android
+
+iPhone
+
+2. Chauffeur Flutter
+
+Android
+
+iPhone
+
+3. Inspecteur Flutter
+
+Validation des documents.
+
+4. Support Flutter
+
+Gestion des incidents.
+
+5. Administration Web
+
+Accessible depuis un navigateur.
+
+6. Tableau de bord Direction
+
+Statistiques et indicateurs.
+
+Les micro-services
+
+Pour garantir les performances, le backend sera séparé en services spécialisés :
+
+Authentification
+Gestion des utilisateurs
+Géolocalisation
+Attribution des courses
+Tarification
+Paiements
+Notifications
+Messagerie
+Rapports
+Fichiers
+Intelligence métier
+Journalisation
+Paramètres
+
+Cette séparation facilitera les évolutions futures.
+
+Les monnaies
+
+Le système devra gérer plusieurs devises.
+
+Exemple :
+
+FC
+
+USD
+
+EUR
+
+ZMW
+
+Mais la devise principale sera définie par l'administrateur.
+
+Les villes
+
+Chaque ville disposera de ses propres paramètres :
+
+Lubumbashi
+
+Kolwezi
+
+Likasi
+
+Kinshasa
+
+Goma
+
+Bukavu
+
+Kisangani
+
+Mbuji-Mayi
+
+Kananga
+
+Chaque ville pourra avoir :
+
+ses chauffeurs ;
+ses tarifs ;
+ses zones ;
+ses promotions ;
+ses administrateurs.
+Le modèle économique
+
+Je te propose de rendre ce point entièrement configurable.
+
+L'administrateur pourra choisir :
+
+commission par course ;
+crédits ("tokens") consommés à chaque course ;
+abonnement mensuel ;
+combinaison des trois.
+
+Ainsi, une même plateforme pourra être utilisée par différentes sociétés avec des modèles économiques différents.
+
+Un point que je souhaite ajouter
+
+Comme tu développes déjà TotoMarket, je voudrais que TOTO RIDE soit pensé dès le départ comme un service partagé.
+
+Par exemple :
+
+Un client achète un produit sur TotoMarket.
+Le commerçant clique sur "Demander un livreur".
+TOTO RIDE reçoit automatiquement la demande.
+Le livreur est affecté.
+Le client suit la livraison en temps réel.
+
+Cette intégration évite de dupliquer les systèmes de livraison et crée un véritable écosystème.
+
+📘 Organisation du cahier des charges
+
+Je propose que nous réalisions ce projet comme un vrai dossier d'ingénierie, avec des chapitres numérotés.
+
+Chapitre 1 : Vision et architecture générale (en cours)
+Chapitre 2 : Analyse détaillée des utilisateurs et des rôles
+Chapitre 3 : Cartographie complète des parcours utilisateurs (plus de 100 scénarios)
+Chapitre 4 : Conception de la base de données
+Chapitre 5 : Conception des API
+Chapitre 6 : Conception des interfaces (Flutter et Web)
+Chapitre 7 : Développement
+Chapitre 8 : Tests et assurance qualité
+Chapitre 9 : Déploiement
+Chapitre 10 : Exploitation et maintenance
+
+mot de passe : n3pjP60dGvgltT0H mot de passe 
+https://ngcjwhmjontbytzlzzlh.supabase.co
+postgresql://postgres:[YOUR-PASSWORD]@db.ngcjwhmjontbytzlzzlh.supabase.co:5432/postgres
+sb_publishable_myzYfnvhis0458z_mMR_7g_TAnQ08s_
+
+host:
+aws-0-eu-west-1.pooler.supabase.com
+
+port:
+6543
+
+database:
+postgres
+
+user:
+postgres.ngcjwhmjontbytzlzzlh
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nY2p3aG1qb250Ynl0emx6emxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM1ODk5MjAsImV4cCI6MjA5OTE2NTkyMH0.ZtsH9d5B1dpRe1HIhyE7qjPh6XqH8TWaW5gLvc2qgoc
+
+
+

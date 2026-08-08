@@ -1,0 +1,8 @@
+node_modules/
+mobile/node_modules/
+mobile/.expo/
+mobile/dist/
+.env
+mobile/.env
+*.log
+.DS_Store
