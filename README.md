@@ -26,6 +26,22 @@ DATABASE_PASSWORD=xxx node supabase/apply-migrate.mjs
 
 Fichier local des clés : `mobile/.env` (ne pas committer).
 
+## Déploiement Vercel (page web)
+
+Le dossier `web/` sert une landing page statique (thème noir / jaune).
+
+1. Connectez le dépôt GitHub sur [vercel.com/new](https://vercel.com/new)
+2. **Framework Preset** : Other
+3. **Build Command** : laisser vide
+4. **Output Directory** : `web`
+5. Déployer
+
+En CLI (après `npx vercel login`) :
+
+```bash
+npx vercel --prod
+```
+
 ## Build APK (Android)
 
 ```bash
